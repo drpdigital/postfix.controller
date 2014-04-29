@@ -13,7 +13,8 @@
 Version 2.3.8 - 2014-04-29
 --------------------------
   - Added phpunit support
-	- Added travis ci support
+  - Added travis ci support
+  - Added bootstrap
 
 Version 2.3.7 - 2014/02/20 - SVN r1651 (postfixadmin-2.3 branch)
 ----------------------------------------------------------------
