@@ -1,5 +1,5 @@
 <?php if( !defined('POSTFIXADMIN') ) die( "This file cannot be used standalone." ); ?>
-<div id="login">
+<div id="login" class="container">
     <form name="login" method="post">
         <table id="" cellspacing="10" class="table table-responsive table-striped">
            <tr>
