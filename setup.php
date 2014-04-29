@@ -60,31 +60,25 @@ $error = 0;
 //
 // Check for PHP version
 //
-if ($f_phpversion == 1)
-{
+if ($f_phpversion == 1) {
     if (phpversion() < 5) {
-        echo "<li><b>Error: Depends on: PHP v5</b><br /></li>\n";
+        echo '<li><strong>Error: Depends on: PHP v5</strong><br></li>';
         $error += 1;
     }
     if (phpversion() >= 5) { 
         $phpversion = 5;
-        echo "<li>PHP version " . phpversion () . "</li>\n";
+        echo '<li>PHP version ' . phpversion() . '</li>';
     }
-}
-else
-{
+} else {
     echo "<li><b>Unable to check for PHP version. (missing function: phpversion())</b></li>\n";
 }
 
 //
 // Check for Apache version
 //
-if ($f_apache_get_version == 1)
-{
+if ($f_apache_get_version == 1) {
     echo "<li>" . apache_get_version() . "</li>\n";
-}
-else
-{
+} else {
     # not running on Apache.
     # However postfixadmin _is_ running, so obviously we are on a supported webserver ;-))
     # No need to confuse the user with a warning.
@@ -97,19 +91,13 @@ echo "<ul>\n";
 //
 // Check for Magic Quotes
 //
-if ($f_get_magic_quotes_gpc == 1)
-{
-    if (get_magic_quotes_gpc () == 0)
-    {
+if ($f_get_magic_quotes_gpc == 1) {
+    if (get_magic_quotes_gpc () == 0) {
         echo "<li class='alert alert-success'>Magic Quotes: Disabled - OK</li>\n";
-    }
-    else
-    {
+    } else {
         echo "<li class='alert alert-warning'><b>Warning: Magic Quotes: ON (internal workaround used)</b></li>\n";   
     }
-}
-else
-{
+} else {
     echo "<li class='alert alert-danger'><b>Unable to check for Magic Quotes. (missing function: get_magic_quotes_gpc())</b></li>\n";
 }
 
@@ -117,8 +105,7 @@ else
 // Check for config.inc.php
 //
 $config_loaded = 0;
-if ($file_config == 1)
-{
+if ($file_config == 1) {
     echo "<li class='alert alert-success'>Depends on: presence config.inc.php - OK</li>\n";
     require_once($incpath.'/config.inc.php');
     $config_loaded = 1;
@@ -131,9 +118,7 @@ if ($file_config == 1)
             echo "You must edit your config.inc.php and change this to true (this indicates you've created the database and user)</b>\n";
         }
     }
-}
-else
-{
+} else {
     echo "<li class='alert alert-danger'><b>Error: Depends on: presence config.inc.php - NOT FOUND</b><br /></li>\n";
     echo "Create the file, and edit as appropriate (e.g. select database type etc)<br />";
     echo "For example:<br />\n";
@@ -144,16 +129,14 @@ else
 //
 // Check if there is support for at least 1 database
 //
-if (($f_mysql_connect == 0) and ($f_mysqli_connect == 0) and ($f_pg_connect == 0))
-{
+if (($f_mysql_connect == 0) and ($f_mysqli_connect == 0) and ($f_pg_connect == 0)) {
     echo "<li class='alert alert-danger'><b>Error: There is no database support in your PHP setup</b><br />\n";
     echo "To install MySQL 3.23 or 4.0 support on FreeBSD:<br />\n";
     echo "<pre>% cd /usr/ports/databases/php$phpversion-mysql/\n";
     echo "% make clean install\n";
     echo " - or with portupgrade -\n";
     echo "% portinstall php$phpversion-mysql</pre>\n";
-    if ($phpversion >= 5)
-    {
+    if ($phpversion >= 5) {
         echo "To install MySQL 4.1 support on FreeBSD:<br />\n";
         echo "<pre>% cd /usr/ports/databases/php5-mysqli/\n";
         echo "% make clean install\n";
@@ -170,18 +153,15 @@ if (($f_mysql_connect == 0) and ($f_mysqli_connect == 0) and ($f_pg_connect == 0
 //
 // MySQL 3.23, 4.0 functions
 //
-if ($f_mysql_connect == 1)
-{
+if ($f_mysql_connect == 1) {
     echo "<li class='alert alert-success'>Depends on: MySQL 3.23, 4.0 - OK</li>\n";
 }
 
 //
 // MySQL 4.1 functions
 //
-if ($phpversion >= 5)
-{
-    if ($f_mysqli_connect == 1)
-    {
+if ($phpversion >= 5) {
+    if ($f_mysqli_connect == 1) {
         echo "<li class='alert alert-success'>Depends on: MySQL 4.1 - OK\n";
         if ( !($config_loaded && $CONF['database_type'] == 'mysqli') ) {
             echo "(change the database_type to 'mysqli' in config.inc.php!!)\n";
@@ -193,8 +173,7 @@ if ($phpversion >= 5)
 //
 // PostgreSQL functions
 //
-if ($f_pg_connect == 1)
-{
+if ($f_pg_connect == 1) {
     echo "<li class='alert alert-success'>Depends on: PostgreSQL - OK \n";
     if ( !($config_loaded && $CONF['database_type'] == 'pgsql') ) {
         echo "(change the database_type to 'pgsql' in config.inc.php!!)\n";
@@ -220,12 +199,9 @@ if ($config_loaded) {
 //
 // Session functions
 //
-if ($f_session_start == 1)
-{
+if ($f_session_start == 1) {
     echo "<li class='alert alert-success'>Depends on: session - OK</li>\n";
-}
-else
-{
+} else {
     echo "<li class='alert alert-danger'><b>Error: Depends on: session - NOT FOUND</b><br />\n";
     echo "To install session support on FreeBSD:<br />\n";
     echo "<pre>% cd /usr/ports/www/php$phpversion-session/\n";
@@ -238,12 +214,9 @@ else
 //
 // PCRE functions
 //
-if ($f_preg_match == 1)
-{
+if ($f_preg_match == 1) {
     echo "<li class='alert alert-success'>Depends on: pcre - OK</li>\n";
-}
-else
-{
+} else {
     echo "<li class='alert alert-danger'><b>Error: Depends on: pcre - NOT FOUND</b><br />\n";
     echo "To install pcre support on FreeBSD:<br />\n";
     echo "<pre>% cd /usr/ports/devel/php$phpversion-pcre/\n";
@@ -256,12 +229,9 @@ else
 //
 // Multibyte functions
 //
-if ( $f_mb_encode_mimeheader == 1 )
-{
+if ( $f_mb_encode_mimeheader == 1 ) {
     echo "<li class='alert alert-success'>Depends on: multibyte string - OK</li>\n";
-}
-else
-{
+} else {
     echo "<li class='alert alert-danger'><b>Error: Depends on: multibyte string - NOT FOUND</b><br />\n";
     echo "To install multibyte string support, install php$phpversion-mbstring</li>\n";
     $error =+ 1;
@@ -271,31 +241,20 @@ else
 //
 // Imap functions
 //
-if ( $f_imap_open == 1)
-{
+if ( $f_imap_open == 1) {
     echo "<li class='alert alert-success'>Depends on: IMAP functions - OK</li>\n";
-}
-else
-{
+} else {
     echo "<li class='alert alert-danger'><b>Warning: Depends on: IMAP functions - NOT FOUND</b><br />\n";
     echo "To install IMAP support, install php$phpversion-imap<br />\n";
     echo "Without IMAP support, you won't be able to create subfolders when creating mailboxes.</li>\n";
     #   $error =+ 1;
 }
 
-
-
-
-
-
 echo "</ul>";
 
-if ($error != 0)
-{
+if ($error != 0) {
     echo "<p class='alert alert-danger'><b>Please fix the errors listed above.</b></p>";
-}
-else
-{
+} else {
     echo "<p class='alert alert-success'>Everything seems fine... attempting to create/update database structure</p>\n";
     require_once($incpath.'/upgrade.php');
 
@@ -383,7 +342,7 @@ else
         ?>
 
 <div class="row">
-    <div class="standout"><?php echo $tMessage; ?></div>
+    <div class="alert alert-success"><?php echo $tMessage; ?></div>
     <div id="edit_form">
         <form name="create_admin" rel="form" method="post">
             <input type="hidden" name="form" value="createadmin" />
@@ -485,5 +444,3 @@ function check_setup_password($password, $lostpw_mode = 0) {
     return array ($error, $result);
 }
 
-/* vim: set expandtab softtabstop=4 tabstop=4 shiftwidth=4: */
-?>
