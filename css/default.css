@@ -73,14 +73,14 @@ ul.flash-error {
 }
 
 #login_header {
-	width: 750px;
+	
 	margin: 0 auto;
 	padding-bottom: 10px;
 	text-align: left;
 }
 
 #login {
-	width: 750px;
+	
 	margin: 0 auto;
 }
 
@@ -99,7 +99,7 @@ ul.flash-error {
 }
 
 #menu {
-	width: 750px;
+	
 	margin: 0 auto;
 	padding-top: 10px;
 	white-space: nowrap;
@@ -167,7 +167,7 @@ ul.flash-error {
 
 
 #main_menu, #edit_form {
-	width: 750px;
+	
 	margin: 0 auto;
 }
 
@@ -228,7 +228,7 @@ ul.flash-error {
 }
 
 #overview, #admin_domains, #admin_virtual {
-	width: 750px;
+	
 	margin: 0 auto;
 	background: #AFE1A6; /*#9ACD32;*/
 	border: 1px solid #bbb;
@@ -242,12 +242,12 @@ ul.flash-error {
 
 #nav_bar {
 	text-align: right;
-	width: 750px;
+	
 	margin: 0 auto;
 }
 
 #alias_domain_table, #alias_table, #mailbox_table, #overview_table, #log_table, #admin_table {
-	width: 750px;
+	
 	margin: 0px auto;
 	border: 1px solid #efefef;
 }
@@ -282,7 +282,7 @@ ul.flash-error {
 }
 
 #footer {
-	width: 750px;
+	
 	margin: 20px auto;
 	border-top: 1px solid #bbbbbb;
 	background: #efefef;
