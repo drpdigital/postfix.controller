@@ -382,38 +382,43 @@ else
     } elseif ($_SERVER['REQUEST_METHOD'] == "GET" || $error != 0 || $lostpw_error == 0) {
         ?>
 
-<div class="standout"><?php echo $tMessage; ?></div>
-<div id="edit_form">
-<form name="create_admin" method="post">
-<input type="hidden" name="form" value="createadmin" />
-<table>
-      <td colspan="3"><h3>Create superadmin account</h3></td>
-   </tr>
-   <tr>
-      <td>Setup password</td>
-      <td><input class="flat" type="password" name="setup_password" value="" /></td>
-      <td><a href="setup.php?lostpw=1">Lost password?</a></td>
-   </tr>
-   <tr>
-      <td><?php echo $PALANG['pAdminCreate_admin_username'] . ":"; ?></td>
-      <td><input class="flat" type="text" name="fUsername" value="<?php echo $tUsername; ?>" /></td>
-      <td><?php echo $pAdminCreate_admin_username_text; ?></td>
-   </tr>
-   <tr>
-      <td><?php echo $PALANG['pAdminCreate_admin_password'] . ":"; ?></td>
-      <td><input class="flat" type="password" name="fPassword" /></td>
-      <td><?php echo $pAdminCreate_admin_password_text; ?></td>
-   </tr>
-   <tr>
-      <td><?php echo $PALANG['pAdminCreate_admin_password2'] . ":"; ?></td>
-      <td><input class="flat" type="password" name="fPassword2" /></td>
-      <td>&nbsp;</td>
-   </tr>
-   <tr>
-      <td colspan="3" class="hlp_center"><input class="button" type="submit" name="submit" value="<?php echo $PALANG['pAdminCreate_admin_button']; ?>" /></td>
-   </tr>
-</table>
-</form>
+<div class="row">
+    <div class="standout"><?php echo $tMessage; ?></div>
+    <div id="edit_form">
+        <form name="create_admin" rel="form" method="post">
+            <input type="hidden" name="form" value="createadmin" />
+            <table class="table-responsive table">
+                <thead>
+                    <tr>
+                        <th colspan="3">Create superadmin account</td>
+                    </tr>
+                </thead>
+                <tr>
+                    <td><label for="setup_password">Setup password</label></td>
+                    <td><input class="form-control" type="password" name="setup_password" value="" /></td>
+                    <td><a href="setup.php?lostpw=1">Lost password?</a></td>
+                </tr>
+                <tr>
+                    <td><label for="fUsername"><?php echo $PALANG['pAdminCreate_admin_username'] . ":"; ?></label></td>
+                    <td><input class="form-control" type="text" name="fUsername" value="<?php echo $tUsername; ?>" /></td>
+                    <td><?php echo $pAdminCreate_admin_username_text; ?></td>
+                </tr>
+                <tr>
+                    <td><label for="fPassword"><?php echo $PALANG['pAdminCreate_admin_password'] . ":"; ?></label></td>
+                    <td><input class="form-control" type="password" name="fPassword" /></td>
+                    <td><?php echo $pAdminCreate_admin_password_text; ?></td>
+                </tr>
+                <tr>
+                    <td><label for="fPassword2"><?php echo $PALANG['pAdminCreate_admin_password2'] . ":"; ?></label></td>
+                    <td><input class="form-control" type="password" name="fPassword2" /></td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="hlp_center"><input class="btn btn-primary" type="submit" name="submit" value="<?php echo $PALANG['pAdminCreate_admin_button']; ?>" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
 </div>
 
 <?php
@@ -472,8 +477,10 @@ function check_setup_password($password, $lostpw_mode = 0) {
         } else {
             $result = '<p><b>Setup password not specified correctly</b></p>';
         }
+        $result .= '<div class="alert-info alert">';
         $result .= '<p>If you want to use the password you entered as setup password, edit config.inc.php and set</p>';
         $result .= "<pre>\$CONF['setup_password'] = '$pass';</pre>";
+        $result .= '</div>';
     }
     return array ($error, $result);
 }
