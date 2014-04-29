@@ -348,29 +348,33 @@ else
     if ( ($setuppw == "" || $setuppw == "changeme" || safeget("lostpw") == 1 || $lostpw_error != 0) /* && $_SERVER['REQUEST_METHOD'] != "POST" */ ) {
 # show "create setup password" form
     ?>
-
-<div class="standout"><?php echo $tMessage; ?></div>
-<div id="edit_form">
-<form name="setuppw" method="post" action="setup.php">
-<input type="hidden" name="form" value="setuppw" />
-<table>
-      <td colspan="3"><h3>Change setup password</h3></td>
-   </tr>
-   <tr>
-      <td>Setup password</td>
-      <td><input class="flat" type="password" name="setup_password" value="" /></td>
-      <td></td>
-   </tr>
-   <tr>
-      <td>Setup password (again)</td>
-      <td><input class="flat" type="password" name="setup_password2" value="" /></td>
-      <td></td>
-   </tr>
-   <tr>
-      <td colspan="3" class="hlp_center"><input class="button" type="submit" name="submit" value="Generate password hash" /></td>
-   </tr>
-</table>
-</form>
+<div class="row">
+    <div class="standout"><?php echo $tMessage; ?></div>
+    <div id="edit_form">
+        <form name="setuppw" role="form" method="post" action="setup.php">
+            <input type="hidden" name="form" value="setuppw" />
+            <table class='table-responsive table'>
+                <thead>
+                    <tr>
+                        <th colspan="3">Change setup password</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><label for="setup_password">Setup password</label></td>
+                        <td colspan="2"><input class="form-control" type="password" name="setup_password" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="setup_password2">Setup password (again)</label></td>
+                        <td colspan="2"><input class="form-control" type="password" name="setup_password2" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="hlp_center"><input class="btn btn-primary" type="submit" name="submit" value="Generate password hash" /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
 </div>
 
 <?php
@@ -415,8 +419,10 @@ else
 <?php
     }
 
-    echo "<b>Since version 2.3 there is no requirement to delete setup.php!</b><br />\n";
-    echo "<b>Check the config.inc.php file for any other settings that you might need to change!<br />\n";
+    echo '<div class="alert alert-info">';
+    echo '<strong>Since version 2.3 there is no requirement to delete setup.php!</strong><br>';
+    echo '<strong>Check the config.inc.php file for any other settings that you might need to change!</strong><br>';
+    echo '</div>';
 }
 ?>
 </div>
