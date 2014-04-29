@@ -15,11 +15,12 @@
 <?php
     if (file_exists (realpath ("../".$CONF['theme_css']))) {
         print "<link rel=\"stylesheet\" type=\"text/css\" href=\"../".htmlentities($CONF['theme_css'])."\" />\n";
+        echo '<link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">';
     } else {
         print "<link rel=\"stylesheet\" type=\"text/css\" href=\"".htmlentities($CONF['theme_css'])."\" />\n";
+        echo '<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">';
     }
     ?>
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
 <title>Postfix Admin - <?php print $_SERVER['HTTP_HOST']; ?></title>
 </head>
 <body>
