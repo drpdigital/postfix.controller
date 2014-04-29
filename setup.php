@@ -342,7 +342,7 @@ if ($error != 0) {
         ?>
 
 <div class="row">
-    <div class="alert alert-success"><?php echo $tMessage; ?></div>
+    <div class="standout"><?php echo $tMessage; ?></div>
     <div id="edit_form">
         <form name="create_admin" rel="form" method="post">
             <input type="hidden" name="form" value="createadmin" />
