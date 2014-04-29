@@ -8,7 +8,12 @@
 #     http://www.postfixadmin.com or http://postfixadmin.sf.net 
 #
 # Last update:
-# $Id: CHANGELOG.TXT 1651 2014-02-20 21:35:01Z christian_boltz $
+# $Id: Changelog 1651 2014-04-29 12:15:01Z agjmills $
+
+Version 2.3.8 - 2014-04-29
+--------------------------
+  - Added phpunit support
+	- Added travis ci support
 
 Version 2.3.7 - 2014/02/20 - SVN r1651 (postfixadmin-2.3 branch)
 ----------------------------------------------------------------
