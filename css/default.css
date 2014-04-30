@@ -1,8 +1,6 @@
 body {
 	background: #ffffff;
 	color: #000000;
-	font-family: "BitStream Vera Sans", Verdana, Arial, Helvetica, sans-serif;
-	font-size: 11px;
 	font-weight: normal;
 	text-align: center;
 }
@@ -12,24 +10,14 @@ nav {
     margin: 0 auto;
 }
 
-a {
-	text-decoration: none;
-	color: #888888;
-}
-
-a:hover {
-	text-decoration: underline;
-	color: #888888;
-}
-
-a:visited, a:active {
-	color: #888888;
-}
-
 table {
 	/* border-spacing: 0; */
 	/* padding: 0; */
 	border-collapse: collapse; /* for IE */
+}
+
+th {
+    text-align: center;
 }
 
 .button {
@@ -219,28 +207,6 @@ ul.flash-error {
 	padding-left: 20px;
 	line-height: 25px;
 	margin: 0;
-}
-
-#footer {
-	
-	margin: 20px auto;
-	border-top: 1px solid #bbbbbb;
-	background: #efefef;
-	color: #999999;
-	line-height: 20px;
-	text-align: left;
-	padding-left: 15px;
-	font-size: 9px;
-}
-
-#footer a {
-	text-decoration: none;
-	color: #999999;
-}
-
-#footer a:hover {
-	text-decoration: underline;
-	color: #777777;
 }
 
 div.setup {
