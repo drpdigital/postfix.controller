@@ -3,8 +3,10 @@
 function _menulink ($href, $title, $submenu = "") {
    if ($submenu != "") {
       $submenu = '<ul class="dropdown-menu"><li><a target="_top" href="'.$href.'">'.$title.'</a>'.$submenu.'</li></ul>';
+      return '<li class="dropdown"><a target="_top" class="dropdown-toggle" data-toggle="dropdown" href="#">'.$title.'</a>'.$submenu.'</li>';
+   } else {
+      return '<li><a target="_top" href="'.$href.'">'.$title.'</a>'.$submenu.'</li>';
    }
-   return '<li><a target="_top" href="'.$href.'">'.$title.'</a>'.$submenu.'</li>';
 } 
 
 authentication_has_role('global-admin');
