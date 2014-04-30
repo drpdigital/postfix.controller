@@ -1,7 +1,7 @@
 <?php if( !defined('POSTFIXADMIN') ) die( "This file cannot be used standalone." ); ?>
-<div id="edit_form">
+<div class="container">
 <form name="alias" method="post">
-<table>
+<table class="table table-responsive table-striped">
    <tr>
       <td colspan="3"><h3><?php print $PALANG['pAdminEdit_admin_welcome']; ?></h3></td></tr>
    <tr>
@@ -11,22 +11,22 @@
    </tr>
    <tr>
       <td><?php print $PALANG['pAdminEdit_admin_password']; ?>:</td>
-      <td><input class="flat" type="password" autocomplete="off" name="fPassword" value=""/></td>
+      <td><input class="form-control" type="password" autocomplete="off" name="fPassword" value=""/></td>
       <td><?php print $pAdminEdit_admin_password_text; ?></td>
    </tr>
    <tr>
       <td><?php print $PALANG['pAdminEdit_admin_password2']; ?>:</td>
-      <td><input class="flat" type="password" name="fPassword2" value="" /></td>
+      <td><input class="form-control" type="password" name="fPassword2" value="" /></td>
       <td>&nbsp;</td>
    </tr>
    <tr>
       <td><?php print $PALANG['pAdminEdit_admin_active']; ?>:</td>
-      <td><input class="flat" type="checkbox" name="fActive" <?php print (!empty ($tActive)) ? 'checked' : ''; ?> /></td>
+      <td><input class="form-control" type="checkbox" name="fActive" <?php print (!empty ($tActive)) ? 'checked' : ''; ?> /></td>
       <td>&nbsp;</td>
    </tr>
    <tr>
       <td><?php print $PALANG['pAdminEdit_admin_super_admin']; ?>:</td>
-      <td><input class="flat" type="checkbox" name="fSadmin" <?php print (!empty ($tSadmin)) ? 'checked' : ''; ?> /></td>
+      <td><input class="form-control" type="checkbox" name="fSadmin" <?php print (!empty ($tSadmin)) ? 'checked' : ''; ?> /></td>
       <td>&nbsp;</td>
    </tr>
    <tr>
@@ -46,7 +46,7 @@
       </td>
    </tr>
    <tr>
-      <td colspan="3" class="hlp_center"><input class="button" type="submit" name="submit" value="<?php print $PALANG['pAdminEdit_admin_button']; ?>" /></td>
+      <td colspan="3" class="hlp_center"><input class="btn btn-primary" type="submit" name="submit" value="<?php print $PALANG['pAdminEdit_admin_button']; ?>" /></td>
    </tr>
    <tr>
       <td colspan="3" class="standout"><?php print $tMessage; ?></td>
