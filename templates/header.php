@@ -16,9 +16,13 @@
     if (file_exists (realpath ("../".$CONF['theme_css']))) {
         print "<link rel=\"stylesheet\" type=\"text/css\" href=\"../".htmlentities($CONF['theme_css'])."\" />\n";
         echo '<link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">';
+        echo '<script type="text/javascript" src="assets/js/jquery-1.11.0.min.js"></script>';
+        echo '<script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>';
     } else {
         print "<link rel=\"stylesheet\" type=\"text/css\" href=\"".htmlentities($CONF['theme_css'])."\" />\n";
         echo '<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">';
+        echo '<script type="text/javascript" src="assets/js/jquery-1.11.0.min.js"></script>';
+        echo '<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>';
     }
     ?>
 <title>Postfix Admin - <?php print $_SERVER['HTTP_HOST']; ?></title>
