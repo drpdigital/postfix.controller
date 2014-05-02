@@ -1,19 +1,14 @@
 <?php if( !defined('POSTFIXADMIN') ) die( "This file cannot be used standalone." ); ?>
 <?php
 function _menulink ($href, $title, $submenu = "") {
-   if ($submenu != "") {
-      $submenu = '<ul class="dropdown-menu"><li><a target="_top" href="'.$href.'">'.$title.'</a>'.$submenu.'</li></ul>';
-      return '<li class="dropdown"><a target="_top" class="dropdown-toggle" data-toggle="dropdown" href="#">'.$title.'</a>'.$submenu.'</li>';
-   } else {
-      return '<li><a target="_top" href="'.$href.'">'.$title.'</a>'.$submenu.'</li>';
-   }
+    if ($submenu != "") $submenu = "<ul><li><a target='_top' href='$href'>$title</a>$submenu</li></ul>";
+    return "<li><a target='_top' href='$href'>$title</a>$submenu</li>";
 } 
 
 authentication_has_role('global-admin');
 
-echo '<nav class="navbar navbar-inverse" id="menu">';
-echo '<div class="container-fluid">';
-echo '<ul class="nav navbar-nav">';
+echo "<div id='menu'>\n";
+echo "<ul>\n";
 
 $url = "create-mailbox.php"; if (isset ($_GET['domain'])) $url .= "?domain=" . urlencode($_GET['domain']);
 $submenu_virtual = _menulink($url, $PALANG['pMenu_create_mailbox']);
@@ -77,8 +72,7 @@ print _menulink("viewlog.php", $PALANG['pMenu_viewlog']);
 print _menulink("logout.php", $PALANG['pMenu_logout']);
 
 echo "</ul>\n";
-echo "</div>";
-echo "</nav>\n";
+echo "</div>\n";
 
 print "<br clear='all' /><br>"; # TODO
 
