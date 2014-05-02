@@ -83,6 +83,39 @@ if ($_SERVER['REQUEST_METHOD'] == "GET")
          $tMaxquota = $row['maxquota'];
       }
    }
+
+$table_alias = table_by_key('alias');
+$alias_list = array();
+$orig_alias_list = array();
+$result = db_query ("SELECT * FROM $table_alias WHERE address='$fUsername' AND domain='$fDomain'");
+if ($result['rows'] == 1)
+{
+    $row = db_array ($result['result']);
+    $tGoto = $row['goto'];
+
+    $orig_alias_list = explode(',', $tGoto);
+    $tGoto = str_replace(',', "\n", $tGoto);
+    $alias_list = $orig_alias_list;
+    /* Has a mailbox as well? Remove the address from $tGoto in order to edit just the real aliases */
+    $result = db_query ("SELECT * FROM $table_mailbox WHERE username='$fUsername' AND domain='$fDomain'");
+    if ($result['rows'] == 1)
+    {
+        $alias_list = array(); // empty it, repopulated again below
+        foreach($orig_alias_list as $alias) {
+            if(strtolower($alias) == strtolower($fUsername)) {
+                // mailbox address is dropped if they don't have special_alias_control enabled, and/or not a global-admin 
+            }
+            else {
+                $alias_list[] = $alias;
+            }
+        }
+    }   
+   // we unset the mailbox address alias_list array, but not the attribute that goes into the alias text area
+   // update the value of tGoto my imploding the array we built above
+   $tGoto = implode("\n", $alias_list);
+}
+
+
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cancel'])) {
@@ -97,6 +130,76 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
    if (isset ($_POST['fName'])) $fName = escape_string ($_POST['fName']);
    if (isset ($_POST['fQuota'])) $fQuota = intval ($_POST['fQuota']);
    if (isset ($_POST['fActive'])) $fActive = escape_string ($_POST['fActive']);
+   //get the value of the new aliases
+   if (isset ($_POST['fGoto'])) $fGoto = escape_string ($_POST['fGoto']);
+   $fGoto = strtolower ($fGoto);
+   //do some string replacement so we end up with a set of CSVs
+   $goto = preg_replace ('/\\\r\\\n/', ',', $fGoto);
+   $goto = preg_replace ('/\r\n/', ',', $goto);
+   $goto = preg_replace ('/,[\s]+/i', ',', $goto); 
+   $goto = preg_replace ('/[\s]+,/i', ',', $goto); 
+   $goto = preg_replace ('/,*$|^,*/', '', $goto);
+   $goto = preg_replace ('/,,*/', ',', $goto);
+
+
+    $new_aliases = array();
+    if ($error != 1)
+    {   
+        $new_aliases = explode(',', $goto);
+    }   
+    $new_aliases = array_unique($new_aliases);
+
+    foreach($new_aliases as $address) {
+        if (in_array($address, $CONF['default_aliases'])) continue;
+        if (empty($address)) continue; # TODO: should never happen - remove after 2.2 release
+        if (!check_email($address))
+        {
+            $error = 1;
+            $tGoto = $goto;
+            if (!empty($tMessage)) $tMessage .= "<br />";
+            $tMessage .= $PALANG['pEdit_alias_goto_text_error2'] . htmlentities($address) . "</span>"; 
+        }
+    }   
+
+   $table_alias = table_by_key('alias');
+   $orig_alias_list = array();
+   $result = db_query ("SELECT * FROM $table_alias WHERE address='$fUsername' AND domain='$fDomain'");
+   if ($result['rows'] == 1)
+   {
+      $row = db_array ($result['result']);
+      $tGoto = $row['goto'];
+
+      $orig_alias_list = explode(',', $tGoto);
+   }
+
+   // we are editing a mailbox alias, so ensure the updated one has a mail box alias
+   $new_aliases[] = $fUsername;
+
+    // duplicates suck, mmkay..
+    $new_aliases = array_unique($new_aliases);
+
+    $goto = implode(',', $new_aliases);
+
+    if ($error != 1)
+    {   
+        $goto = escape_string($goto);
+        $result = db_query ("UPDATE $table_alias SET goto='$goto',modified=NOW() WHERE address='$fUsername' AND domain='$fDomain'");
+        if ($result['rows'] != 1)
+        {
+            $tMessage = $PALANG['pEdit_alias_result_error'];
+        }
+        else
+        {
+            db_log ($SESSID_USERNAME, $fDomain, 'edit_alias', "$fUsername -> $goto");
+            header ("Location: list-virtual.php?domain=$fDomain");
+            exit;
+        }
+    } else { # on error
+        $tGoto = htmlentities($_POST['fGoto']);
+    }
+
+
+
 
    if($fPassword != $user_details['password'] || $fPassword2 != $user_details['password']){
       $min_length = $CONF['min_password_length'];
